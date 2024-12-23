@@ -1,0 +1,9 @@
+{
+	"name": "medical-adf-ws",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9d829860-7791-4a79-be9a-e67850cbc03c",
+		"tenantId": "0fc8a057-8abc-41da-8107-634959075991"
+	}
+}
