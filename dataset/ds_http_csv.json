@@ -1,0 +1,30 @@
+{
+	"name": "ds_http_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_git_http",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ds_p_filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@concat('bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets/',dataset().ds_p_filename)",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
