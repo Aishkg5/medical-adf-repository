@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "WebConnection",
 		"typeProperties": {
-			"url": "https://github.com/bigdatabysumitm/Trendytech-Azure-Project/tree/52363ada2314964b313f09876da47d379033e87e/datasets/EMR",
+			"url": "https://raw.githubusercontent.com",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
