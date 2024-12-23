@@ -30,11 +30,22 @@
 				"inputs": [
 					{
 						"referenceName": "ds_http_csv",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"ds_p_filename": {
+								"value": "@variables('v_file_names')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"variables": {
+			"v_file_names": {
+				"type": "Array"
+			}
+		},
 		"folder": {
 			"name": "sqldb"
 		},
