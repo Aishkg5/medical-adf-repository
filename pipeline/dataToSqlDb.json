@@ -96,7 +96,7 @@
 			}
 		],
 		"variables": {
-			"v_file_paths": {
+			"pv_file_paths": {
 				"type": "Array",
 				"defaultValue": [
 					{
@@ -121,9 +121,13 @@
 					}
 				]
 			},
-			"v_relative_path": {
+			"pv_relative_path": {
 				"type": "String",
 				"defaultValue": "bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets/"
+			},
+			"pv_base_url": {
+				"type": "String",
+				"defaultValue": "https://raw.githubusercontent.com/"
 			}
 		},
 		"folder": {
