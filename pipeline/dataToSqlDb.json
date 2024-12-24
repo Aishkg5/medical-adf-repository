@@ -39,7 +39,7 @@
 			}
 		],
 		"variables": {
-			"v_file_names": {
+			"v_file_paths": {
 				"type": "Array"
 			}
 		},
