@@ -123,7 +123,7 @@
 			},
 			"v_relative_path": {
 				"type": "String",
-				"defaultValue": "bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets"
+				"defaultValue": "bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets/"
 			}
 		},
 		"folder": {

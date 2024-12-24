@@ -22,7 +22,7 @@
 			"location": {
 				"type": "HttpServerLocation",
 				"relativeUrl": {
-					"value": "@concat(dataset().ds_p_relative_path,dataset().ds_p_filename,dataset().ds_p_filename)",
+					"value": "@concat(dataset().ds_p_relative_path,dataset().ds_p_folder,dataset().ds_p_filename)",
 					"type": "Expression"
 				}
 			},
