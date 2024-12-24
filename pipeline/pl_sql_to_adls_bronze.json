@@ -184,6 +184,10 @@
 													"ds_folder": {
 														"value": "@concat(item().targetpath,'/archive/',formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'%M' ),'/',formatDateTime(utcNow(),'%d' ))",
 														"type": "Expression"
+													},
+													"ds_file": {
+														"value": "@split(item().tablename,'.')[1]",
+														"type": "Expression"
 													}
 												}
 											}
