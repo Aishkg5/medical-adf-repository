@@ -15,10 +15,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_adls'"
 		},
-		"ls_git_http_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "@{linkedService().baseURL}"
-		},
 		"AzureSqlDatabase_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "medical-sql-db-server.database.windows.net"
@@ -34,6 +30,10 @@
 		"ls_adls_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://medicalprojectadls.dfs.core.windows.net/"
+		},
+		"ls_git_http_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().baseURL}"
 		},
 		"containerUri": {
 			"type": "string",
@@ -68,9 +68,6 @@
 					"ls_adls_accountKey": {
 						"value": "[parameters('ls_adls_accountKey')]"
 					},
-					"ls_git_http_properties_typeProperties_url": {
-						"value": "[parameters('ls_git_http_properties_typeProperties_url')]"
-					},
 					"AzureSqlDatabase_properties_typeProperties_server": {
 						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_server')]"
 					},
@@ -82,6 +79,9 @@
 					},
 					"ls_adls_properties_typeProperties_url": {
 						"value": "[parameters('ls_adls_properties_typeProperties_url')]"
+					},
+					"ls_git_http_properties_typeProperties_url": {
+						"value": "[parameters('ls_git_http_properties_typeProperties_url')]"
 					}
 				}
 			},

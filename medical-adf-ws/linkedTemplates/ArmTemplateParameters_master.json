@@ -11,9 +11,6 @@
 		"ls_adls_accountKey": {
 			"value": ""
 		},
-		"ls_git_http_properties_typeProperties_url": {
-			"value": "@{linkedService().baseURL}"
-		},
 		"AzureSqlDatabase_properties_typeProperties_server": {
 			"value": "medical-sql-db-server.database.windows.net"
 		},
@@ -25,6 +22,9 @@
 		},
 		"ls_adls_properties_typeProperties_url": {
 			"value": "https://medicalprojectadls.dfs.core.windows.net/"
+		},
+		"ls_git_http_properties_typeProperties_url": {
+			"value": "@{linkedService().baseURL}"
 		},
 		"containerUri": {
 			"value": ""
