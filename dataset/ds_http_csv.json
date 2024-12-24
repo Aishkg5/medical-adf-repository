@@ -8,6 +8,9 @@
 		"parameters": {
 			"ds_p_filename": {
 				"type": "string"
+			},
+			"ds_p_folder": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -16,7 +19,7 @@
 			"location": {
 				"type": "HttpServerLocation",
 				"relativeUrl": {
-					"value": "@concat('bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets/',dataset().ds_p_filename)",
+					"value": "@concat('bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets',dataset().ds_p_filename,dataset().ds_p_filename)",
 					"type": "Expression"
 				}
 			},

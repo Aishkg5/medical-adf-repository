@@ -32,10 +32,8 @@
 						"referenceName": "ds_http_csv",
 						"type": "DatasetReference",
 						"parameters": {
-							"ds_p_filename": {
-								"value": "@variables('v_file_names')",
-								"type": "Expression"
-							}
+							"ds_p_filename": "departments.csv",
+							"ds_p_folder": "/EMR/trendytech-hospital-a/"
 						}
 					}
 				]
