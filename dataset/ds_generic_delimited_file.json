@@ -1,5 +1,5 @@
 {
-	"name": "ds_generic",
+	"name": "ds_generic_delimited_file",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_adls",
