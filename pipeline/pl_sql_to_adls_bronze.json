@@ -195,6 +195,122 @@
 									}
 								]
 							}
+						},
+						{
+							"name": "full load or incremental load",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "If file exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(item().loadtype,'Full')",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "full_load copy",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"sqlReaderQuery": {
+													"value": "@concat('SELECT *,''',item().datasource,''' as datasource from ',item().tablename)",
+													"type": "Expression"
+												},
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"sink": {
+												"type": "ParquetSink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												},
+												"formatSettings": {
+													"type": "ParquetWriteSettings"
+												}
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "AzureSqlTable",
+												"type": "DatasetReference",
+												"parameters": {
+													"ds_p_schema": {
+														"value": "@split(item().tablename,'.' )[0]",
+														"type": "Expression"
+													},
+													"ds_p_table": {
+														"value": "@split(item().tablename,'.' )[1]",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "ds_generic_adls_parquet",
+												"type": "DatasetReference",
+												"parameters": {
+													"ds_container": "bronze",
+													"ds_folder": {
+														"value": "@item().targetpath",
+														"type": "Expression"
+													},
+													"ds_file": {
+														"value": "@split(item().tablename,'.')[1]",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Insert logs full load",
+										"type": "Lookup",
+										"dependsOn": [
+											{
+												"activity": "full_load copy",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": []
+									}
+								]
+							}
 						}
 					]
 				}
