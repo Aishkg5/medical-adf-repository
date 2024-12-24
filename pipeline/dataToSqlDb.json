@@ -68,7 +68,11 @@
 											"type": "Expression"
 										},
 										"ds_p_relative_path": {
-											"value": "@variables('v_relative_path')",
+											"value": "@variables('pv_relative_path')",
+											"type": "Expression"
+										},
+										"ds_p_base_url": {
+											"value": "@variables('pv_base_url')",
 											"type": "Expression"
 										}
 									}
