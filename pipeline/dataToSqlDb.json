@@ -32,8 +32,7 @@
 						"referenceName": "ds_http_csv",
 						"type": "DatasetReference",
 						"parameters": {
-							"ds_p_filename": "departments.csv",
-							"ds_p_folder": "/EMR/trendytech-hospital-a/"
+							"ds_p_relative_path": "bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets"
 						}
 					}
 				]
