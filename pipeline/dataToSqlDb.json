@@ -80,11 +80,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"ds_p_schema": {
-											"value": "@item().folder",
+											"value": "@split(replace(item().folder ,'-','_'),'/')[2]",
 											"type": "Expression"
 										},
 										"ds_p_table": {
-											"value": "@item().file",
+											"value": "@split(item().file,'.' )",
 											"type": "Expression"
 										}
 									}
