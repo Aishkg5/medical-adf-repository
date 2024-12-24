@@ -3,44 +3,96 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
-				"type": "Copy",
+				"name": "ForEach1",
+				"type": "ForEach",
 				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
+					"items": {
+						"value": "@variables('v_file_paths')",
+						"type": "Expression"
 					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_http_csv",
-						"type": "DatasetReference",
-						"parameters": {
-							"ds_p_relative_path": "bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets"
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_http_csv",
+									"type": "DatasetReference",
+									"parameters": {
+										"ds_p_filename": {
+											"value": "@item().file",
+											"type": "Expression"
+										},
+										"ds_p_folder": {
+											"value": "@item().folder",
+											"type": "Expression"
+										},
+										"ds_p_relative_path": {
+											"value": "@variables('v_relative_path')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
-					}
-				]
+					]
+				}
 			}
 		],
 		"variables": {
 			"v_file_paths": {
-				"type": "Array"
+				"type": "Array",
+				"defaultValue": [
+					{
+						"folder": "/EMR/trendytech-hospital-a/",
+						"file": "departments.csv"
+					},
+					{
+						"folder": "/EMR/trendytech-hospital-a/",
+						"file": "encounters.csv"
+					},
+					{
+						"folder": "/EMR/trendytech-hospital-a/",
+						"file": "patients.csv"
+					},
+					{
+						"folder": "/EMR/trendytech-hospital-a/",
+						"file": "providers.csv"
+					},
+					{
+						"folder": "/EMR/trendytech-hospital-a/",
+						"file": "transactions.csv"
+					}
+				]
+			},
+			"v_relative_path": {
+				"type": "String",
+				"defaultValue": "bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets"
 			}
 		},
 		"folder": {
