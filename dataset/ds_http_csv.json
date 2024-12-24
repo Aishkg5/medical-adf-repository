@@ -3,7 +3,13 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_git_http",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"baseURL": {
+					"value": "@dataset().ds_p_base_url",
+					"type": "Expression"
+				}
+			}
 		},
 		"parameters": {
 			"ds_p_filename": {
@@ -13,6 +19,9 @@
 				"type": "string"
 			},
 			"ds_p_relative_path": {
+				"type": "string"
+			},
+			"ds_p_base_url": {
 				"type": "string"
 			}
 		},
