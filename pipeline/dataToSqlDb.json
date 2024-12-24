@@ -84,7 +84,7 @@
 											"type": "Expression"
 										},
 										"ds_p_table": {
-											"value": "@split(item().file,'.' )",
+											"value": "@split(item().file,'.' )[0]",
 											"type": "Expression"
 										}
 									}
