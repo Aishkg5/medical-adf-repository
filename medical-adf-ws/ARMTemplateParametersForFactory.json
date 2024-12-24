@@ -8,11 +8,8 @@
 		"AzureSqlDatabase_password": {
 			"value": ""
 		},
-		"ls_git_properties_typeProperties_url": {
-			"value": "https://raw.githubusercontent.com"
-		},
 		"ls_git_http_properties_typeProperties_url": {
-			"value": "https://raw.githubusercontent.com/"
+			"value": "@{linkedService().baseURL}"
 		},
 		"AzureSqlDatabase_properties_typeProperties_server": {
 			"value": "medical-sql-db-server.database.windows.net"

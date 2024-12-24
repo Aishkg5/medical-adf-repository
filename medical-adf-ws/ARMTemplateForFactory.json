@@ -11,13 +11,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureSqlDatabase'"
 		},
-		"ls_git_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://raw.githubusercontent.com"
-		},
 		"ls_git_http_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://raw.githubusercontent.com/"
+			"defaultValue": "@{linkedService().baseURL}"
 		},
 		"AzureSqlDatabase_properties_typeProperties_server": {
 			"type": "string",
@@ -49,7 +45,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"items": {
-								"value": "@variables('v_file_paths')",
+								"value": "@variables('pv_file_paths')",
 								"type": "Expression"
 							},
 							"isSequential": true,
@@ -108,7 +104,11 @@
 													"type": "Expression"
 												},
 												"ds_p_relative_path": {
-													"value": "@variables('v_relative_path')",
+													"value": "@variables('pv_relative_path')",
+													"type": "Expression"
+												},
+												"ds_p_base_url": {
+													"value": "@variables('pv_base_url')",
 													"type": "Expression"
 												}
 											}
@@ -139,34 +139,38 @@
 					"elapsedTimeMetric": {}
 				},
 				"variables": {
-					"v_file_paths": {
+					"pv_file_paths": {
 						"type": "Array",
 						"defaultValue": [
 							{
-								"folder": "/EMR/trendytech-hospital-a/",
+								"folder": "/EMR/trendytech-hospital-b/",
 								"file": "departments.csv"
 							},
 							{
-								"folder": "/EMR/trendytech-hospital-a/",
+								"folder": "/EMR/trendytech-hospital-b/",
 								"file": "encounters.csv"
 							},
 							{
-								"folder": "/EMR/trendytech-hospital-a/",
+								"folder": "/EMR/trendytech-hospital-b/",
 								"file": "patients.csv"
 							},
 							{
-								"folder": "/EMR/trendytech-hospital-a/",
+								"folder": "/EMR/trendytech-hospital-b/",
 								"file": "providers.csv"
 							},
 							{
-								"folder": "/EMR/trendytech-hospital-a/",
+								"folder": "/EMR/trendytech-hospital-b/",
 								"file": "transactions.csv"
 							}
 						]
 					},
-					"v_relative_path": {
+					"pv_relative_path": {
 						"type": "String",
 						"defaultValue": "bigdatabysumitm/Trendytech-Azure-Project/refs/heads/main/datasets/"
+					},
+					"pv_base_url": {
+						"type": "String",
+						"defaultValue": "https://raw.githubusercontent.com/"
 					}
 				},
 				"folder": {
@@ -180,25 +184,15 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ls_git')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "WebConnection",
-				"typeProperties": {
-					"url": "[parameters('ls_git_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/ls_git_http')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"baseURL": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "HttpServer",
 				"typeProperties": {
@@ -216,7 +210,13 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "ls_git_http",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"baseURL": {
+							"value": "@dataset().ds_p_base_url",
+							"type": "Expression"
+						}
+					}
 				},
 				"parameters": {
 					"ds_p_filename": {
@@ -226,6 +226,9 @@
 						"type": "string"
 					},
 					"ds_p_relative_path": {
+						"type": "string"
+					},
+					"ds_p_base_url": {
 						"type": "string"
 					}
 				},
