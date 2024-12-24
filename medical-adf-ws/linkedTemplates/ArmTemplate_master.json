@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureSqlDatabase'"
 		},
+		"ls_adls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_adls'"
+		},
 		"ls_git_http_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "@{linkedService().baseURL}"
@@ -26,6 +30,10 @@
 		"AzureSqlDatabase_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "sqladmin"
+		},
+		"ls_adls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://medicalprojectadls.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -57,6 +65,9 @@
 					"AzureSqlDatabase_password": {
 						"value": "[parameters('AzureSqlDatabase_password')]"
 					},
+					"ls_adls_accountKey": {
+						"value": "[parameters('ls_adls_accountKey')]"
+					},
 					"ls_git_http_properties_typeProperties_url": {
 						"value": "[parameters('ls_git_http_properties_typeProperties_url')]"
 					},
@@ -68,6 +79,9 @@
 					},
 					"AzureSqlDatabase_properties_typeProperties_userName": {
 						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_userName')]"
+					},
+					"ls_adls_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_properties_typeProperties_url')]"
 					}
 				}
 			},
