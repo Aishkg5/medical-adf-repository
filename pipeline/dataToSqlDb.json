@@ -104,23 +104,23 @@
 				"type": "Array",
 				"defaultValue": [
 					{
-						"folder": "/EMR/trendytech-hospital-a/",
+						"folder": "/EMR/trendytech-hospital-b/",
 						"file": "departments.csv"
 					},
 					{
-						"folder": "/EMR/trendytech-hospital-a/",
+						"folder": "/EMR/trendytech-hospital-b/",
 						"file": "encounters.csv"
 					},
 					{
-						"folder": "/EMR/trendytech-hospital-a/",
+						"folder": "/EMR/trendytech-hospital-b/",
 						"file": "patients.csv"
 					},
 					{
-						"folder": "/EMR/trendytech-hospital-a/",
+						"folder": "/EMR/trendytech-hospital-b/",
 						"file": "providers.csv"
 					},
 					{
-						"folder": "/EMR/trendytech-hospital-a/",
+						"folder": "/EMR/trendytech-hospital-b/",
 						"file": "transactions.csv"
 					}
 				]
