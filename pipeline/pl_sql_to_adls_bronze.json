@@ -213,6 +213,55 @@
 									"value": "@equals(item().loadtype,'Full')",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "fetch last loaded time",
+										"type": "Lookup",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": []
+									},
+									{
+										"name": "incremental load copy",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "fetch last loaded time",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "AzureSqlSource",
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "AzureSqlTable",
+												"type": "DatasetReference"
+											}
+										]
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "full_load copy",
