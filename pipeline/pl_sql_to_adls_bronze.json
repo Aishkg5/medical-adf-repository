@@ -249,15 +249,63 @@
 										"typeProperties": {
 											"source": {
 												"type": "AzureSqlSource",
+												"sqlReaderQuery": {
+													"value": "@concat('SELECT *,''',item().datasource,''' as datasource from ',item().tablename,' where ',\nitem().watermark,' >= ''',activity('fetch last loaded time').output.firstRow.last_fetched_date,''''\n)",
+													"type": "Expression"
+												},
 												"queryTimeout": "02:00:00",
 												"partitionOption": "None"
 											},
-											"enableStaging": false
+											"sink": {
+												"type": "ParquetSink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												},
+												"formatSettings": {
+													"type": "ParquetWriteSettings"
+												}
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
 										},
 										"inputs": [
 											{
 												"referenceName": "AzureSqlTable",
-												"type": "DatasetReference"
+												"type": "DatasetReference",
+												"parameters": {
+													"ds_p_schema": {
+														"value": "@split(item().tablename,'.')[0]",
+														"type": "Expression"
+													},
+													"ds_p_table": {
+														"value": "@split(item().tablename,'.')[1]",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "ds_generic_adls_parquet",
+												"type": "DatasetReference",
+												"parameters": {
+													"ds_container": "bronze",
+													"ds_folder": {
+														"value": "@item().targetpath",
+														"type": "Expression"
+													},
+													"ds_file": {
+														"value": "@split(item().tablename,'.')[1]",
+														"type": "Expression"
+													}
+												}
 											}
 										]
 									}
