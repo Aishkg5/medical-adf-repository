@@ -77,7 +77,17 @@
 							"outputs": [
 								{
 									"referenceName": "AzureSqlTable",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"ds_p_schema": {
+											"value": "@item().folder",
+											"type": "Expression"
+										},
+										"ds_p_table": {
+											"value": "@item().file",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
