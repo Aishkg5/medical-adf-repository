@@ -41,7 +41,7 @@
 				"     fileSystem: 'bronze',",
 				"     folderPath: 'cptcodes',",
 				"     compressionCodec: 'snappy',",
-				"     partitionFileNames:['cptcodes'],",
+				"     partitionFileNames:['cptcode'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
