@@ -39,7 +39,7 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> hospital1ClaimDataSrc",
-				"hospital1ClaimDataSrc derive(data_source = hosa) ~> derivedColumn1",
+				"hospital1ClaimDataSrc derive(data_source = 'hosa') ~> derivedColumn1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
