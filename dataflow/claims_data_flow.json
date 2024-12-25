@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "claims_data_flow",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
