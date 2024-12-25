@@ -192,6 +192,55 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pl_claim_data_to_bronze')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "cpt codes data flow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "cpt_data_flow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"cptcodeSrc": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "bonze"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/cpt_data_flow')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pl_sql_to_adls_bronze')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -551,7 +600,10 @@
 													"scripts": [
 														{
 															"type": "Query",
-															"text": "@concat('insert into audit.load_logs(data_source,table_name,number_of_rows_copied,water_mark_column_name,load_date) values (''',item().datasource,''',''',item().tablename,''',''',activity('incremental load copy').output.rowscopied,''',''',item().watermark,''',''',utcNow(),''')')"
+															"text": {
+																"value": "@concat('insert into audit.load_logs(data_source,table_name,number_of_rows_copied,water_mark_column_name,load_date) values (''',item().datasource,''',''',item().tablename,''',''',activity('incremental load copy').output.rowscopied,''',''',item().watermark,''',''',utcNow(),''')')",
+																"type": "Expression"
+															}
 														}
 													],
 													"scriptBlockExecutionTimeout": "02:00:00"
@@ -661,7 +713,10 @@
 													"scripts": [
 														{
 															"type": "Query",
-															"text": "@concat(\n'insert into audit.load_logs(data_source,table_name,number_of_rows_copied,water_mark_column_name,load_date)values(\n''',item().datasource,''',''',item().tablename,''',''',activity('full_load copy').output.rowscopied,''',''',item().watermark,''',''',utcNow(),''')')"
+															"text": {
+																"value": "@concat(\n'insert into audit.load_logs(data_source,table_name,number_of_rows_copied,water_mark_column_name,load_date)values(\n''',item().datasource,''',''',item().tablename,''',''',activity('full_load copy').output.rowscopied,''',''',item().watermark,''',''',utcNow(),''')')",
+																"type": "Expression"
+															}
 														}
 													],
 													"scriptBlockExecutionTimeout": "02:00:00"
@@ -929,55 +984,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pl_claim_data_to_bronze')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "cpt codes data flow",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "cpt_data_flow",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"cptcodeSrc": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"folder": {
-					"name": "bonze"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/cpt_data_flow')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/claims_data_flow')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -1086,7 +1092,7 @@
 						"     fileSystem: 'bronze',",
 						"     folderPath: 'cptcodes',",
 						"     compressionCodec: 'snappy',",
-						"     partitionFileNames:['cptcodes'],",
+						"     partitionFileNames:['cptcode'],",
 						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
