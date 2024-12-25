@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow1",
+						"referenceName": "claims_data_flow",
 						"type": "DataFlowReference"
 					},
 					"compute": {
