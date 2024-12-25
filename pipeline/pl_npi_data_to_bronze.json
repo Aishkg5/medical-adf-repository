@@ -1,0 +1,9 @@
+{
+	"name": "pl_npi_data_to_bronze",
+	"properties": {
+		"folder": {
+			"name": "bonze"
+		},
+		"annotations": []
+	}
+}
