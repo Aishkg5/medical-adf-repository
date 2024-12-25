@@ -292,7 +292,7 @@
 								"referenceName": "ls_adls",
 								"type": "LinkedServiceReference"
 							},
-							"name": "hospital1ClaimDataSrc"
+							"name": "hospital2ClaimDataSrc"
 						}
 					],
 					"sinks": [
@@ -317,19 +317,19 @@
 						"     format: 'delimited',",
 						"     fileSystem: 'landing',",
 						"     folderPath: 'claims',",
-						"     fileName: 'hospital1_claim_data.csv',",
+						"     fileName: 'hospital2_claim_data.csv',",
 						"     columnDelimiter: ',',",
 						"     escapeChar: '\\\\',",
 						"     quoteChar: '\\\"',",
-						"     columnNamesAsHeader: true) ~> hospital1ClaimDataSrc",
-						"hospital1ClaimDataSrc derive(data_source = 'hosa') ~> derivedColumn1",
+						"     columnNamesAsHeader: true) ~> hospital2ClaimDataSrc",
+						"hospital2ClaimDataSrc derive(data_source = 'hosb') ~> derivedColumn1",
 						"derivedColumn1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     format: 'parquet',",
 						"     fileSystem: 'bronze',",
 						"     folderPath: 'claims',",
 						"     compressionCodec: 'snappy',",
-						"     partitionFileNames:['hospital1_claim_data'],",
+						"     partitionFileNames:['hospital2_claim_data'],",
 						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
@@ -1016,7 +1016,7 @@
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"hospital1ClaimDataSrc": {},
+									"hospital2ClaimDataSrc": {},
 									"sink1": {}
 								}
 							},
